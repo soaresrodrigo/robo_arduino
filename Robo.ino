@@ -9,15 +9,47 @@
 #define motor_b_p1 6;		// Motor B, rotação horária
 #define motor_b_p2 7;		// Motor B, rotação antihorária
 
+//Sensores
+
+#define sensor_de_linha_frente 4;		// Sensor de linha da frente
+#define sensor_de_linha_atras 4;		// Sensor de linha de trás
+
+
+
 // ==========================
 //      Métodos padrões 
 // ===========================
 
 void setup(){
 	pinosMotores();
+	pinosSensoresDeLinha();
 }
 
 void loop(){
+	afastaDaLinha();
+}
+
+// ==========================
+//      Métodos sensores 
+// ===========================
+
+void pinosSensoresDeLinha(){
+	pinMode(sensor_de_linha_frente, INPUT);
+	pinMode(sensor_de_linha_atras, INPUT);
+}
+
+void afastaDaLinha(){
+	bool sensor_frente = digitalRead(sensor_de_linha_frente);
+	bool sensor_atras = digitalRead(sensor_de_linha_atras);
+	
+	if(sensor_frente){
+		frear();
+		virar_direita();
+	}
+	
+	if(sensor_atras){
+		ir_pra_frente();
+	}
 }
 
 // ==========================
