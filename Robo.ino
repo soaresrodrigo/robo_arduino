@@ -8,7 +8,8 @@
 #define motor_a_p2 5;		// Motor A, rotação antihorária
 #define motor_b_p1 6;		// Motor B, rotação horária
 #define motor_b_p2 7;		// Motor B, rotação antihorária
-
+#define led_vermelhor 8;
+#define led_verde 9;
 // ==========================
 //      Métodos padrões 
 // ===========================
@@ -94,7 +95,7 @@ void re_motor_b(){
 }
 
 // ==========================
-//      Método para defesa 
+//      Método para defesa laterais
 // ==========================
 
 
@@ -103,8 +104,22 @@ void re_motor_b(){
 
 
 
+// ==========================
+//      Método para ataque 
+// ==========================
 
+int estado;
+estado = digitalRead(sensor);
 
+if (estado ==0) {
+ir_pra_frente();
+digitalWrite(led_vermelhor, HIGH);
+; 
+}
+else{
+analogWrite(led_verde, HIGH);
+
+}
 
 
 

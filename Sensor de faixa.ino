@@ -17,11 +17,8 @@ pinMode(IN4, OUTPUT);
 void loop() {
   bool sensor = digitalRead(pinsensor);
 if (sensor) {
-digitalWrite(IN1, LOW);
-digitalWrite(IN2, HIGH);
-digitalWrite(IN3, HIGH);
-digitalWrite(IN4, LOW);
-delay(500);
+virar_esquerda();
+ir_pra_frente(){
 }
   
 }
