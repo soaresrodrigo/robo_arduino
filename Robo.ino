@@ -8,56 +8,72 @@
 #define motor_a_p2 5;		// Motor A, rotação antihorária
 #define motor_b_p1 6;		// Motor B, rotação horária
 #define motor_b_p2 7;		// Motor B, rotação antihorária
-<<<<<<< HEAD
-#define led_vermelha 8;        
-#define led_verde 9;
-=======
 
 //Sensores
 
 #define sensor_de_linha_frente 4;		// Sensor de linha da frente
 #define sensor_de_linha_atras 4;		// Sensor de linha de trás
-#define sensor_lado_direito 10                   //Sensor lateral direito
-#define sensor_lado_esquerdo 11                  //Sensor lateral esquerdo
- 
+#define sensor_de_infra_frente 10 		// Sensor infravermelho frontal
+#define sensor_de_infra_esquerdo 11		// Sensor infravermelho esquerdo
+#define sensor_de_infra_direito 11		// Sensor infravermelho direito
 
 
->>>>>>> 562a66f1897928271f958c78e343b18f0f883cb1
 // ==========================
 //      Métodos padrões 
 // ===========================
 
 void setup(){
+	delay(5000);
 	pinosMotores();
-	pinosSensoresDeLinha();
+	pinosSensores();
 }
 
 void loop(){
 	afastaDaLinha();
-        atacar ao lado direito();
-        atacar ao lado esquerdo();
+	ataque();
 }
 
 // ==========================
 //      Métodos sensores 
 // ===========================
 
-void pinosSensoresDeLinha(){
+void pinosSensores(){
 	pinMode(sensor_de_linha_frente, INPUT);
 	pinMode(sensor_de_linha_atras, INPUT);
+	pinMode(sensor_de_infra_frente, INPUT);
+	pinMode(sensor_de_infra_esquerdo, INPUT);
+	pinMode(sensor_de_infra_direito, INPUT);
 }
 
 void afastaDaLinha(){
 	bool sensor_frente = digitalRead(sensor_de_linha_frente);
 	bool sensor_atras = digitalRead(sensor_de_linha_atras);
 	
-	if(sensor_frente){
+	while(sensor_frente){
 		frear();
 		virar_direita();
 	}
 	
-	if(sensor_atras){
+	while(sensor_atras){
 		ir_pra_frente();
+	}
+}
+
+void ataque(){
+	bool infra_frente = digitalRead(sensor_de_infra_frente);	
+	bool infra_esquerdo = digitalRead(sensor_de_infra_esquerdo);		
+	bool infra_direito = digitalRead(sensor_de_infra_direito);
+	
+	while(infra_frente){
+		ir_pra_frente();
+	}
+	
+	while(infra_esquerdo){
+		virar_esquerda();
+	}
+	
+	while(infra_direito){
+		virar_direita();
 	}
 }
 
@@ -133,70 +149,3 @@ void re_motor_b(){
 	digitalWrite(motor_b_p1, LOW);
 	digitalWrite(motor_b_p2, HIGH);
 }
-
-// ==========================
-//      Método para defesa laterais
-// ==========================
-
-
-void defesa do lado direito (){             //Defender o lado direito girando
-	pinMode(sensor_lado_direito, INPUT);
-	
-}
-void atacar ao lado direito(){
-	bool sensor_direito = digitalRead(sensor_lado_direito);
-	
-	if(sensor_direito){
-		virar_direita();
-	}
-	
-	
-	
-void defesa do lado esquerdo (){              //Defender o lado esquerdo girando
-	pinMode(sensor_lado_esquerdo, INPUT);
-	
-}
-void atacar ao lado esquerdo(){
-	bool sensor_esquerdo = digitalRead(sensor_lado_esquerdo);
-	
-	if(sensor_esquerdo){
-		virar_esquerdo();
-	}
-	
-
-
-
-
-// ==========================
-//      Método para ataque 
-// ==========================
-
-int estado;
-estado = digitalRead(sensor);
-
-if (estado ==0) {
-ir_pra_frente();
-digitalWrite(led_vermelhor, HIGH);
-; 
-}
-else{
-analogWrite(led_verde, HIGH);
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
