@@ -13,17 +13,23 @@
 //      Métodos padrões 
 // ===========================
 
-void setup()
-{
+void setup(){
+	pinosMotores();
 }
 
-void loop()
-{
+void loop(){
 }
 
 // ==========================
 //      Métodos motores 
 // ===========================
+
+void pinosMotores(){
+	pinMode(motor_a_p1, OUTPUT);
+	pinMode(motor_a_p2, OUTPUT);
+	pinMode(motor_b_p1, OUTPUT);
+	pinMode(motor_b_p2, OUTPUT);
+}
 
 // Referente ao robô
 
@@ -86,6 +92,10 @@ void re_motor_b(){
 	digitalWrite(motor_b_p1, LOW);
 	digitalWrite(motor_b_p2, HIGH);
 }
+
+// ==========================
+//      Método para defesa 
+// ==========================
 
 
 
