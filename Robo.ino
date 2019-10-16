@@ -9,7 +9,7 @@
 #define motor_b_p1 6;		// Motor B, rotação horária
 #define motor_b_p2 7;		// Motor B, rotação antihorária
 <<<<<<< HEAD
-#define led_vermelhor 8;
+#define led_vermelha 8;        
 #define led_verde 9;
 =======
 
@@ -17,7 +17,9 @@
 
 #define sensor_de_linha_frente 4;		// Sensor de linha da frente
 #define sensor_de_linha_atras 4;		// Sensor de linha de trás
-
+#define sensor_lado_direito 10                   //Sensor lateral direito
+#define sensor_lado_esquerdo 11                  //Sensor lateral esquerdo
+ 
 
 
 >>>>>>> 562a66f1897928271f958c78e343b18f0f883cb1
@@ -32,6 +34,8 @@ void setup(){
 
 void loop(){
 	afastaDaLinha();
+        atacar ao lado direito();
+        atacar ao lado esquerdo();
 }
 
 // ==========================
@@ -135,7 +139,30 @@ void re_motor_b(){
 // ==========================
 
 
-
+void defesa do lado direito (){             //Defender o lado direito girando
+	pinMode(sensor_lado_direito, INPUT);
+	
+}
+void atacar ao lado direito(){
+	bool sensor_direito = digitalRead(sensor_lado_direito);
+	
+	if(sensor_direito){
+		virar_direita();
+	}
+	
+	
+	
+void defesa do lado esquerdo (){              //Defender o lado esquerdo girando
+	pinMode(sensor_lado_esquerdo, INPUT);
+	
+}
+void atacar ao lado esquerdo(){
+	bool sensor_esquerdo = digitalRead(sensor_lado_esquerdo);
+	
+	if(sensor_esquerdo){
+		virar_esquerdo();
+	}
+	
 
 
 
