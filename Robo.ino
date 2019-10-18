@@ -1,6 +1,11 @@
+#include <Servo.h>
 // =====================
 //      Variáveis 
 // ======================
+
+// Servo
+#define SERVO 7 
+Servo servo; // Instancia o servo
 
 //Motores
 
@@ -29,7 +34,10 @@
 // ===========================
 
 void setup(){
+  servo.attach(SERVO);
+  servo.write(0);
 //  delay(5000);
+  servo.write(90);
   pinosMotores();
   pinosSensores();  
 }
@@ -37,8 +45,6 @@ void setup(){
 void loop(){  
 //afastaDaLinha();
 //ataque();
-frente_motor_a();
-re_motor_b();
 
 }
 
@@ -47,23 +53,23 @@ re_motor_b();
 // ===========================
 
 void pinosSensores(){
-//  pinMode(sensor_de_linha_frente, INPUT);
-//  pinMode(sensor_de_linha_atras, INPUT);
+  pinMode(sensor_de_linha_frente, INPUT);
+  pinMode(sensor_de_linha_atras, INPUT);
   pinMode(sensor_de_infra_frente, INPUT);
   pinMode(sensor_de_infra_esquerdo, INPUT);
-//  pinMode(sensor_de_infra_direito, INPUT);
+  pinMode(sensor_de_infra_direito, INPUT);
 }
 
 void afastaDaLinha(){
   bool sensor_frente = digitalRead(sensor_de_linha_frente);
   bool sensor_atras = digitalRead(sensor_de_linha_atras);
   
-  while(sensor_frente){
+  if(!sensor_frente){
     frear();
     virar_direita();
   }
   
-  while(sensor_atras){
+  if(!sensor_atras){
     ir_pra_frente();
   }
 }
@@ -80,13 +86,13 @@ void ataque(){
     frear();
     }
   
-// if(!infra_esquerdo){
-//   virar_esquerda();
-//  }
+ if(!infra_esquerdo){
+   virar_esquerda();
+  }
   
-//  while(infra_direito){
-//    virar_direita();
-//  }
+  if(!infra_direito){
+    virar_direita();
+  }
 }
 
 // ==========================
